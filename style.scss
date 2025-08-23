@@ -1,0 +1,172 @@
+%flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin hover-link($color) {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+
+  &:hover {
+    color: $color;
+  }
+}
+
+$link-colors: #ff5722, #4caf50, #2196f3;
+
+nav {
+  background-color: #1b1dc0;
+  padding: 1rem;
+  height: 65px;
+  @extend %flex-between;
+
+  h1 {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0;
+    font-size: 30px;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+
+
+    @for $i from 1 through 3 {
+      li:nth-child(#{$i}) a {
+        @include hover-link(nth($link-colors, $i));
+      }
+    }
+
+    li a {
+      font-weight: bold;
+    }
+  }
+}
+////////////////////end nav bar////////////////////
+
+
+$card-bg: #fff;
+$card-radius: 12px;
+$card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+$primary-color: #2196f3;
+$primary-hover: #1976d2;
+
+
+%flex-col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+@mixin button-style($bg, $hover-bg) {
+  background-color: $bg;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $hover-bg;
+  }
+}
+
+
+@mixin card-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+
+@mixin card-style {
+  width: 100%;
+  max-width: 500px;
+  padding: 1.5rem;
+  background-color: $card-bg;
+  border-radius: $card-radius;
+  box-shadow: $card-shadow;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  @extend %flex-col-center;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+
+  img {
+    @include card-img;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 0.8rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
+    margin-bottom: 1.2rem;
+  }
+
+  button {
+    @include button-style($primary-color, $primary-hover);
+  }
+
+
+}
+
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .card1,
+  .card2,
+  .card3,
+  .card4 {
+    @include card-style;
+  }
+}
+
+
+
+$button-colors: #e74c3c, #27ae60, #2980b9, #9c27b0;
+
+@for $i from 1 through 4 {
+  .card .card#{$i} button {
+    background-color: nth($button-colors, $i);
+
+  }
+}
+
+
+
+
+
+
+
